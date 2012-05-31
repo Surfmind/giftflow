@@ -692,7 +692,11 @@ class Goods extends CI_Controller {
 			"good_id" => $this->G->id,
 			"user_id" => $U->id
 			);
-		$this->hooks->call('good_edited', $hook_data);
+		//$this->hooks->call('good_edited', $hook_data);
+		$this->load->library('event_logger');	
+		$E = new Event_logger();
+
+		$E->basic('good_edited',$hook_data);
 
 		// Set flashdata
 		$this->session->set_flashdata('success','Changes saved successfully.');

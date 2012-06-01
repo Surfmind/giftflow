@@ -195,11 +195,17 @@ class Market
 			);
 
 
-			// Hook: `transaction_new` OR 'thankyou'
-			if($options['hook'] != 'thankyou')
+			// Events and Notifications, formerly known as hooks:  `transaction_new` OR 'thankyou'
+			if($options['hook'] == 'transaction_new')
 			{
-				$this->CI->hooks->call($options['hook'], $hook_data);
+
+				$E = new Event_logger();
+				$E->transaction_new('transaction_new',$hook_data);
+				$N = new Notify();
+				$N->alert_transaction_new('transaction_new',$hook_data);
+
 			}
+			//thankyou events/notifications are handled by the thankyou controller
 
 			return $Transaction->id;
 	}
@@ -406,7 +412,7 @@ class Market
 	*	@param string $options['rating']		Rating of review
 	*	@param int $options['reviewer_id']		Reviewer ID
 	*	@param object $options['transaction_data']	Data of transaction
-	*	@param string $options['hook']			which hook should be called review/thankyou
+	*	@param string $options['hook']			what notifaications/events should be called review_new/thankyou
 	*	@return boolean
 	*/
 	public function review($options)
@@ -476,8 +482,16 @@ class Market
 		}
 		
 		
-		// Hook: 'transaction_reviewed' or 'thankyou'
-		$this->CI->hooks->call($options['hook'], $hook_data);
+		// Hook: 'review_new' or 'thankyou'
+		// thankyou Events and Notifications are hanled by the thankyou controller
+		if($options['hook'] == 'review_new')
+		{
+			$E = new Event_logger();
+			$E->review_new('review_new',$hook_data);
+
+			$N = new Notify();
+			$N->review_new('review_new',$hook_data);
+		}
 
 		// Attempt to change status to completed
 		$this->complete(array(

@@ -142,22 +142,7 @@ $hook['transaction_completed'][] = array(
 	'filename' => 'Event_logger.php',
 	'filepath' => 'libraries'
 );
-
-$hook['review_new'][] = array(
-	'class'    => 'Event_logger',
-	'function' => 'review_new',
-	'filename' => 'Event_logger.php',
-	'filepath' => 'libraries'
-);
-
-$hook['review_new'][] = array(
-	'class'    => 'Notify',
-	'function' => 'review_new',
-	'filename' => 'notify.php',
-	'filepath' => 'libraries'
-);
-
-
+	
 $hook['user_registration_manual'][] = array(
 	'class'    => 'Notify',
 	'function' => 'alert_user_registration_manual',

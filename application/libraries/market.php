@@ -71,6 +71,8 @@ class Market
 		$this->CI->load->library('datamapper');
 		$this->CI->load->library('Search/Good_search');
 		$this->CI->load->library('Search/Transaction_search');
+		$this->CI->load->library('Event_logger');
+		$this->CI->load->library('Notify');
 	}
 	
 	/**

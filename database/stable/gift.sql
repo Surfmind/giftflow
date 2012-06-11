@@ -608,6 +608,23 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE INDEX `user_id` ON `user_settings` (`user_id` ASC) ;
 
+-- ----------------------------------------------------
+-- Table `links`
+-- ----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `links` (
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `sender_id` int(10) NOT NULL,
+  `recipient_id` int(11) NOT NULL,
+  `type` enum('thankyou') NOT NULL,
+  `transaction_id` int(100) NOT NULL,
+  `code` varchar(200) DEFAULT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) 
+ENGINE=InnoDB  
+DEFAULT CHARSET=utf8;
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
